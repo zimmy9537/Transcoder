@@ -1,0 +1,14 @@
+{
+    "backend_api_endpoints": {
+        "upload": [
+            {
+                "LAMBDA": "upload",
+                "METHOD": "GET",
+                "REQUEST_PARAMETER" : {
+                    "method.request.querystring.apiKey": true,
+                    "method.request.querystring.fileName": true
+                }
+            }
+        ]
+    }
+}
