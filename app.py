@@ -6,7 +6,7 @@ import sys
 
 from aws_cdk import App, Environment
 
-from transcoding.cdk.constructs.service_stack import ServiceStack
+from cdk.constructs.service_stack import ServiceStack
 
 
 def launch(app, env, environment):
