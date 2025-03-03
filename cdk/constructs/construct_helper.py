@@ -54,11 +54,11 @@ class ConstructHelper:
             dict: Config Data
         """
         if root_config_path is None:
-            config_path = os.path.join(os.getcwd(), "cdk", "constructs", "config")
+            root_config_path = os.path.join(os.getcwd(), "cdk", "constructs", "config")
         
-        config_path = os.path.join(root_config_path, file_name)
-        with open(config_path, "r", encoding="utf-8") as file:
+        config = os.path.join(root_config_path, file_name)
+        with open(config, "r", encoding="utf-8") as file:
             data = file.read()
-            config_data = json.loads(data)
+            config = json.loads(data)
         
-        return config_data
+        return config

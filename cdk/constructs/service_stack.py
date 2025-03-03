@@ -30,7 +30,7 @@ class ServiceStack(Stack):
         lambda_construct = LambdaConstruct(
             self,
             "LambdaConstruct",
-            iam_construct,
+            iam_construct.lambda_role,
             construct_helper
         )
 

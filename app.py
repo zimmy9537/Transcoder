@@ -25,9 +25,8 @@ def launch(app, env, environment):
 if __name__ == "__main__":
     app = App()
 
-    if len(sys.argv) > 1:
-        environment = sys.argv[1]
-        env = Environment(region="us-east-1", account="975050194088")
-        launch(app, env, environment)
+    environment = "int"
+    env = Environment(region="us-east-1", account="654654454176")
+    launch(app, env, environment)
 
-        app.synth()
+    app.synth()

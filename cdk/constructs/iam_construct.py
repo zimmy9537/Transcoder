@@ -115,6 +115,11 @@ class IamConstruct(Construct):
             self.construct_helper.get_resource_name("api-gateway-role"),
             assumed_by=iam.ServicePrincipal("apigateway.amazonaws.com"),
             inline_policies={"S3Policy": self.s3_policy_document},
+            managed_policies=[
+                iam.ManagedPolicy.from_aws_managed_policy_name(
+                    "service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+                )
+            ]
         )
 
     def create_lambda_role(self) -> None:

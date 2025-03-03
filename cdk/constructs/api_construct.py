@@ -42,7 +42,7 @@ class ApiConstruct(Construct):
 
         api_resources_data = self.construct_helper.read_config_data("api_resources.json")
 
-        self.backend_api_resources = api_resources_data["backend_api_resources"]
+        self.backend_api_endpoints = api_resources_data["backend_api_endpoints"]
 
         self.create_api_gateway()
 
@@ -59,6 +59,7 @@ class ApiConstruct(Construct):
             rest_api_name=api_name,
             description="API Gateway for Transcoder Service",
             policy=self.api_gateway_policy_document,
+            cloud_watch_role=True
         )
 
         suffix = self.construct_helper.get_parameter_value("SUFFIX")
@@ -122,8 +123,8 @@ class ApiConstruct(Construct):
         Returns:
             _lambda.Function: The Lambda function if found, else None
         """
-        for function in self.lambda_functions:
-            if function.function_name == lambda_name:
+        for function_name, function in self.lambda_functions.items():
+            if function_name == lambda_name:
                 return function
         return None
 

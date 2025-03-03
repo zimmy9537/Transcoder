@@ -39,7 +39,11 @@ class LambdaConstruct(Construct):
 
         self.lambda_role = lambda_role
 
+        # Create Layers
         self.create_layers()
+
+        # Create Lambda Functions
+        self.create_lambda()
     
     def create_layers(self) -> None:
         """
@@ -72,6 +76,7 @@ class LambdaConstruct(Construct):
         self.lambda_functions = {}
         for lambda_config in self.lambda_data:
             self.lambda_functions[lambda_config.get("name")] = self.get_lambda(lambda_config)
+
         
     
     def get_lambda(self, lambda_config):
@@ -101,7 +106,7 @@ class LambdaConstruct(Construct):
             memory_size=lambda_config.get("memory_size"),
             runtime=_lambda.Runtime.PYTHON_3_12,
             code=_lambda.Code.from_asset(
-                os.path.join(os.getcwd(), "service", "handlers", lambda_name)
+                os.path.join(os.getcwd(), "service", "handlers", "lambdas", lambda_name)
             ),
             role=self.lambda_role,
             handler = "lambda_handler.lambda_handler",

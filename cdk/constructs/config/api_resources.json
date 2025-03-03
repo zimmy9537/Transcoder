@@ -2,7 +2,7 @@
     "backend_api_endpoints": {
         "upload": [
             {
-                "LAMBDA": "upload",
+                "LAMBDA": "uploader",
                 "METHOD": "GET",
                 "REQUEST_PARAMETER" : {
                     "method.request.querystring.apiKey": true,
