@@ -33,6 +33,7 @@ class IamConstruct(Construct):
         self.create_api_gateway_policy()
         self.create_apigateway_read_policy()
         self.create_lambda_policy()
+        self.create_cloud_watch_policy()
 
         # create roles
         self.create_api_gateway_role()
@@ -105,6 +106,25 @@ class IamConstruct(Construct):
         self.lambda_policy_document = iam.PolicyDocument(
             statements=[lambda_policy_statement]
         )
+    
+    def create_cloud_watch_policy(self) -> None:
+        """
+        Create Cloud Watch Policy
+        """
+        cloud_watch_policy_statement = iam.PolicyStatement(
+            actions=[
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+            ],
+            effect=iam.Effect.ALLOW,
+            resources=["*"],
+            sid="CloudWatchPolicyStatement",
+        )
+
+        self.cloud_watch_policy_document = iam.PolicyDocument(
+            statements=[cloud_watch_policy_statement]
+        )
 
     def create_api_gateway_role(self) -> None:
         """
@@ -134,5 +154,6 @@ class IamConstruct(Construct):
                 "LambdaPolicy": self.lambda_policy_document,
                 "S3Policy": self.s3_policy_document,
                 "APIGatewayReadPolicy": self.apigateway_read_policy_document,
+                "CloudWatchPolicy": self.cloud_watch_policy_document,
             },
         )

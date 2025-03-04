@@ -2,12 +2,13 @@
 Lambda to initialize transcoding
 """
 
-def lambda_handler(event, context):
+from typing import Any
+
+def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
     """
     Lambda handler function to initialize transcoding
     Args:
         event (dict): Event data
-        context (object): Context data
     Returns:
         dict: Response
     """
