@@ -5,8 +5,8 @@
                 "LAMBDA": "uploader",
                 "METHOD": "GET",
                 "REQUEST_PARAMETER" : {
-                    "method.request.querystring.apiKey": true,
-                    "method.request.querystring.fileName": true
+                    "method.request.querystring.fileName": true,
+                    "method.request.querystring.userId": true
                 }
             }
         ]

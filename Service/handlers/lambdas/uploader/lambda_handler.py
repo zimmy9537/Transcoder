@@ -3,6 +3,9 @@ Lambda for uploading files to s3
 """
 
 from typing import Any
+from upload_manager import UploadManager
+
+uploadManager = UploadManager()
 
 def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
     """
@@ -12,7 +15,12 @@ def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
     Returns:
         dict: Response
     """
-    return {
-        "statusCode": 200,
-        "body": "Hello from uploader lambda!"
-    }
+    
+    queryparam = event["queryStringParameters"]
+
+    file_name = queryparam["fileName"]
+    user_id = queryparam["userId"]
+    
+    response = uploadManager.generate_s3_put_presigned_url(file_name, user_id)
+
+    return response
