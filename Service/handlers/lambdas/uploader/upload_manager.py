@@ -35,7 +35,7 @@ class UploadManager:
         try:
             presigned_url = s3_client.generate_presigned_post(
                 Bucket=bucket,
-                key=f'uploads/{user_id}/{time.time()}/{file_name}',
+                Key=f"uploads/{user_id}/{time.time()}/{file_name}",
                 ExpiresIn=900,
             )
 

@@ -8,7 +8,7 @@ Deploy:
 import os
 from constructs import Construct
 from aws_cdk import aws_lambda as _lambda
-from aws_cdk import Duration
+from aws_cdk import Duration, Size
 from aws_cdk import aws_iam as iam
 
 class LambdaConstruct(Construct):
@@ -104,6 +104,9 @@ class LambdaConstruct(Construct):
             function_name=lambda_resource_name,
             timeout= Duration.seconds(lambda_config.get("timeout")),
             memory_size=lambda_config.get("memory_size"),
+            ephemeral_storage_size=Size.mebibytes(
+                lambda_config.get("ephemeral_storage_size"),
+            ),
             runtime=_lambda.Runtime.PYTHON_3_12,
             code=_lambda.Code.from_asset(
                 os.path.join(os.getcwd(), "service", "handlers", "lambdas", lambda_name)

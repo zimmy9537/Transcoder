@@ -106,7 +106,7 @@ class IamConstruct(Construct):
         self.lambda_policy_document = iam.PolicyDocument(
             statements=[lambda_policy_statement]
         )
-    
+
     def create_cloud_watch_policy(self) -> None:
         """
         Create Cloud Watch Policy
@@ -139,7 +139,7 @@ class IamConstruct(Construct):
                 iam.ManagedPolicy.from_aws_managed_policy_name(
                     "service-role/AmazonAPIGatewayPushToCloudWatchLogs"
                 )
-            ]
+            ],
         )
 
     def create_lambda_role(self) -> None:

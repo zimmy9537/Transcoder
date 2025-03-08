@@ -24,7 +24,7 @@ if __name__ == "__main__":
     app = App()
 
     environment = "int"
-    env = Environment(region="us-east-1", account="339712878703")
+    env = Environment(region="us-east-1", account="211125591634")
     launch(app, env, environment)
 
     app.synth()

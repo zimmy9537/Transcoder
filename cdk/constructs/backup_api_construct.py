@@ -219,9 +219,9 @@ class ApiConstruct(Construct):
         """
         if method_type in ["GET", "POST", "OPTIONS"]:
             api_resource.add_cors_preflight(
-                allow_origins=["*"],  # Allow all origins, but restrict as needed
+                allow_origins=["*"],
                 allow_methods=["GET", "POST", "OPTIONS"],
-                allow_headers=["*"],  # You can restrict this as needed
+                allow_headers=["*"],
             )
 
     def create_method_response(self):

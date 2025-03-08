@@ -3,14 +3,16 @@
         "name": "uploader",
         "description": "Lambda function to upload files to S3",
         "timeout": 300,
-        "memory_size": 256,
+        "memory_size": 1024,
+        "ephemeral_storage_size": 2048,
         "environment": ["SUFFIX"]
     },
     {
         "name": "transcoder",
         "description": "Lambda function to transcode video files",
         "timeout": 300,
-        "memory_size": 256,
+        "memory_size": 1024,
+        "ephemeral_storage_size": 2048,
         "environment": ["SUFFIX"]
     }
 ]

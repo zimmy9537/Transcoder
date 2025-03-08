@@ -4,9 +4,11 @@ Lambda for uploading files to s3
 
 from typing import Any
 from upload_manager import UploadManager
+from response.response_handler import generate_response
 
 uploadManager = UploadManager()
 
+@generate_response
 def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
     """
     Lambda handler function to upload files to s3
@@ -16,7 +18,7 @@ def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
         dict: Response
     """
     
-    queryparam = event["queryStringParameters"]
+    queryparam = event["params"]["querystring"]
 
     file_name = queryparam["fileName"]
     user_id = queryparam["userId"]

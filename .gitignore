@@ -10,3 +10,5 @@ __pycache__
 cdk.out
 
 node_modules
+
+service/handlers/layers/external
