@@ -48,5 +48,6 @@ class ServiceStack(Stack):
         S3Construct(
             self,
             "S3Construct",
-            construct_helper
+            construct_helper,
+            lambda_construct.lambda_functions
         )

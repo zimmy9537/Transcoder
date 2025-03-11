@@ -12,6 +12,7 @@ def lambda_handler(event: dict[str, Any], _) -> dict[str, Any]:
     Returns:
         dict: Response
     """
+    print(event)
     return {
         "statusCode": 200,
         "body": "Hello from transcoder lambda!"

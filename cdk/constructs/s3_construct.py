@@ -6,7 +6,7 @@ Deploy:
 """
 
 from constructs import Construct
-from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_s3 as s3, aws_s3_notifications
 from aws_cdk import RemovalPolicy
 
 buckets = ["videostore"]
@@ -16,7 +16,7 @@ class S3Construct(Construct):
     """S3 Constructs CDK definition"""
 
     def __init__(
-        self, scope: Construct, stack_id: str, construct_helper, **kwargs
+        self, scope: Construct, stack_id: str, construct_helper, lambda_functions, **kwargs
     ) -> None:
         """
         Following parameters are required to create an S3 Construct:
@@ -30,6 +30,8 @@ class S3Construct(Construct):
         super().__init__(scope, stack_id, **kwargs)
 
         self.construct_helper = construct_helper
+
+        self.transcoder_lambda = lambda_functions["transcoder"]
 
         for bucket in buckets:
             self.create_s3_bucket(bucket)
@@ -46,6 +48,11 @@ class S3Construct(Construct):
             versioned=True,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
             removal_policy=RemovalPolicy.DESTROY,
+        )
+
+        event = aws_s3_notifications.LambdaDestination(self.transcoder_lambda)
+        self.bucket.add_event_notification(
+            s3.EventType.OBJECT_CREATED, event
         )
 
         self.bucket.add_cors_rule(
