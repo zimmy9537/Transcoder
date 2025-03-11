@@ -11,11 +11,12 @@ from aws_cdk import RemovalPolicy
 
 buckets = ["videostore"]
 
+
 class S3Construct(Construct):
     """S3 Constructs CDK definition"""
 
     def __init__(
-            self, scope: Construct, stack_id: str, construct_helper, **kwargs
+        self, scope: Construct, stack_id: str, construct_helper, **kwargs
     ) -> None:
         """
         Following parameters are required to create an S3 Construct:
@@ -32,7 +33,7 @@ class S3Construct(Construct):
 
         for bucket in buckets:
             self.create_s3_bucket(bucket)
-    
+
     def create_s3_bucket(self, bucket_name: str) -> None:
         """
         Create S3 Bucket
@@ -41,9 +42,10 @@ class S3Construct(Construct):
             self,
             self.construct_helper.get_resource_name(bucket_name),
             bucket_name=self.construct_helper.get_resource_name(bucket_name),
+            public_read_access=False,
             versioned=True,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
-            removal_policy=RemovalPolicy.DESTROY
+            removal_policy=RemovalPolicy.DESTROY,
         )
 
         self.bucket.add_cors_rule(
@@ -53,5 +55,5 @@ class S3Construct(Construct):
                 s3.HttpMethods.POST,
             ],
             allowed_origins=["*"],
-            allowed_headers=["*"]
+            allowed_headers=["*"],
         )

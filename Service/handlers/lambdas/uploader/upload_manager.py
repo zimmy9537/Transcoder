@@ -11,7 +11,7 @@ from aws_lambda_powertools import Logger
 from botocore.config import Config
 
 suffix = os.environ.get("SUFFIX", "int")
-bucket = f"uploader-{suffix}"
+bucket = f"videostore-{suffix}"
 config = Config(signature_version="s3v4")
 
 logger = Logger()
